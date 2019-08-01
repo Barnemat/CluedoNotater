@@ -1,0 +1,29 @@
+{
+  "HVEM?": [
+    "Birger Breine",
+    "Mons Multe",
+    "Barbro Blåklokke",
+    "Lars Lavendel",
+    "Ragnhild Rose",
+    "Vigdis Hvitveis"
+  ],
+  "HVA?": [
+    "Skiftenøkkel",
+    "Lysestake",
+    "Dolk",
+    "Pistol",
+    "Blyrør",
+    "Tau"
+  ],
+  "HVOR?": [
+    "Badet",
+    "Arbeidsværelset",
+    "Spisestuen",
+    "Spillerommet",
+    "Garasjen",
+    "Soveværelset",
+    "Dagligstuen",
+    "Kjøkkenet",
+    "Gårdsplassen"
+  ]
+}
