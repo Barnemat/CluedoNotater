@@ -18,24 +18,33 @@ export default class Col extends React.Component {
 
     this.state = {
       icon: 0,
-      text: ''
+      text: '',
+      locked: false
     };
 
+    this.handleLongPress = this.handleLongPress.bind(this);
     this.toggleIcon = this.toggleIcon.bind(this);
   }
 
+  handleLongPress() {
+    const { locked, icon } = this.state;
+    if (icon === 0) return;
+
+    this.setState({ locked: !locked, icon: locked ? 0 : icon });
+  }
+
   toggleIcon() {
-    const { icon } = this.state;
+    const { icon, locked } = this.state;
     const { empty, name, main } = this.props;
 
-    if (empty || name || main) return;
+    if (empty || name || main, locked) return;
 
     this.setState({ icon: icon < this.icons.length - 1 ? icon + 1 : 0 });
   }
 
   render() {
     const { empty, main, heading, bold, name } = this.props;
-    const { icon } = this.state;
+    const { icon, locked } = this.state;
 
     return (
       <View style={[!empty && !main && styles.white, heading != '' || main ? styles.itemCol : styles.col, styles.margin]}>
@@ -53,9 +62,13 @@ export default class Col extends React.Component {
 
           />
         :
-          <TouchableOpacity onPress={this.toggleIcon}>
+          <TouchableOpacity onPress={this.toggleIcon} delayLongPress={20} onLongPress={this.handleLongPress}>
             <View style={ styles.center }>
-              <Icon style={this.icons[icon] === 'plus' && { opacity: 0.0 }} name={this.icons[icon]} size={20} />
+              <Icon
+                style={[(this.icons[icon] === 'plus' || empty || main) && { opacity: 0.0 }, locked && (icon === 3 ? { color: 'green' } : { color: 'red' })]}
+                name={this.icons[icon]}
+                size={20}
+              />
             </View>
           </TouchableOpacity>}
       </View>
