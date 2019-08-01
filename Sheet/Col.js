@@ -4,7 +4,8 @@ import {
   StyleSheet,
   View,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  TextInput
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -16,7 +17,8 @@ export default class Col extends React.Component {
     this.icons = ['plus', 'remove', 'minus', 'check'];
 
     this.state = {
-      icon: 0
+      icon: 0,
+      text: ''
     };
 
     this.toggleIcon = this.toggleIcon.bind(this);
@@ -24,18 +26,32 @@ export default class Col extends React.Component {
 
   toggleIcon() {
     const { icon } = this.state;
-    console.log(icon);
+    const { empty, name, main } = this.props;
+
+    if (empty || name || main) return;
+
     this.setState({ icon: icon < this.icons.length - 1 ? icon + 1 : 0 });
   }
 
   render() {
-    const { empty, main, heading, bold } = this.props;
+    const { empty, main, heading, bold, name } = this.props;
     const { icon } = this.state;
 
     return (
       <View style={[!empty && !main && styles.white, heading != '' || main ? styles.itemCol : styles.col, styles.margin]}>
         {heading ? 
           <Text style={[bold && styles.bold, styles.text]}>{heading}</Text>
+        : name ?
+          <TextInput
+            style={[styles.textField, styles.bold, styles.center]}
+            onChangeText={(text) => this.setState({ text })}
+            value={this.state.text}
+            autoCorrect={false}
+            contextMenuHidden={true}
+            allowFontScaling={false}
+            maxLength={10}
+
+          />
         :
           <TouchableOpacity onPress={this.toggleIcon}>
             <View style={ styles.center }>
@@ -54,7 +70,8 @@ const styles = StyleSheet.create({
   },
   itemCol: {
     flex: 2,
-    alignSelf: 'stretch'
+    alignSelf: 'stretch',
+    paddingLeft: 5
   },
   bold : {
     fontWeight: 'bold'
@@ -74,5 +91,11 @@ const styles = StyleSheet.create({
   center: {
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  textField: {
+    height: 30,
+    width: 60,
+    fontSize: 16,
+    paddingTop: -10
   }
 });

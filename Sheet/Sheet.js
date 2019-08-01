@@ -10,13 +10,14 @@ import data from '../assets/items_no.json';
 
 export default class Sheet extends React.Component {
   renderRows() {
+    let key = 0;
     const categories = Object.keys(data);
-    const elements = [<Row heading='' main />];
+    const elements = [<Row key={key++} heading='' main />];
 
     categories.forEach((category) => {
-      elements.push(<Row heading={category} bold noCols />);
+      elements.push(<Row key={key++} heading={category} bold noCols />);
       
-      data[category].forEach((name) => {elements.push(<Row heading={name} />);});
+      data[category].forEach((name) => {elements.push(<Row key={key++} heading={name} />);});
     });
 
     return elements;
@@ -35,6 +36,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    width: 560
+    width: 560,
+    marginTop: 10,
+    marginLeft: 7,
+    marginRight: 7,
+    marginBottom: 10
   }
 });

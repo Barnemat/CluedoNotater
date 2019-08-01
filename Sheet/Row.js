@@ -12,11 +12,12 @@ const numCols = 8;
 export default class Row extends React.Component {
   renderCols() {
     const cols = [];
+    let key = 0;
     
-    cols.push(<Col heading={this.props.heading} bold={this.props.bold} main={this.props.main} />)
+    cols.push(<Col key={key++} heading={this.props.heading} bold={this.props.bold} main={this.props.main} />)
     
     for (let i = 0; i < numCols - 1; i++) {
-      cols.push(<Col heading='' empty={this.props.noCols} />);
+      cols.push(<Col key={key++} heading='' empty={this.props.noCols} name={this.props.main} />);
     }
 
     return cols;
