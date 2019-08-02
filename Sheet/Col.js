@@ -14,7 +14,7 @@ export default class Col extends React.Component {
   constructor(props) {
     super(props);
 
-    this.icons = ['plus', 'remove', 'minus', 'check'];
+    this.icons = ['plus', 'remove', 'question', 'check'];
 
     this.state = {
       icon: 0,
@@ -37,7 +37,7 @@ export default class Col extends React.Component {
     const { icon, locked } = this.state;
     const { empty, name, main } = this.props;
 
-    if (empty || name || main, locked) return;
+    if (empty || name || main || locked) return;
 
     this.setState({ icon: icon < this.icons.length - 1 ? icon + 1 : 0 });
   }
@@ -62,7 +62,7 @@ export default class Col extends React.Component {
 
           />
         :
-          <TouchableOpacity onPress={this.toggleIcon} delayLongPress={20} onLongPress={this.handleLongPress}>
+          <TouchableOpacity onPress={this.toggleIcon} delayLongPress={100} onLongPress={this.handleLongPress}>
             <View style={ styles.center }>
               <Icon
                 style={[(this.icons[icon] === 'plus' || empty || main) && { opacity: 0.0 }, locked && (icon === 3 ? { color: 'green' } : { color: 'red' })]}
